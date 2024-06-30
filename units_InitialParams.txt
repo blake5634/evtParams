@@ -1,3 +1,4 @@
+DataFile            : text
 ET_area             : m2
 ET_diam             : m
 ET_radius           : m
