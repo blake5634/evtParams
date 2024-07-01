@@ -5,9 +5,9 @@ ET_radius           : 1.2500000E-02
 Fintercept          : 1.450E-03
 J                   : 5.1000000E-04
 K2drag              : 1.0000000E+01
-Kdrag               : 8
+Kdrag               : 50
 LLine_SIu           : 1.0000000E-08
-Lmax                : 0.6
+Lmax                : 0.59
 PBA_static          : 1.200E+05
 PHalt_dyn           : 1.150E+05
 Patmosphere         : 1.0132500E+05
@@ -18,7 +18,7 @@ Rsource_SIu         : 0.8700E+08
 T                   : 2.9540000E+02
 Tau_coulomb         : 1.7400000E-02
 Threshold Taper     : 3.2319188E+03
-Vhousing_m3         : 1.000E-03
+Vhousing_m3         : 1.460E-03
 Vintercept          : 4.2137669E-01
 dF1dL               : 3.6363636E+00
 dt                  : 2.5000000E-03

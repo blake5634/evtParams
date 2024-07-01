@@ -7,7 +7,7 @@ J                   : 5.600E-04
 K2drag              : 1.0000000E+01
 Kdrag               : 80.0
 LLine_SIu           : 1.0000000E-08
-Lmax                : 0.6
+Lmax                : 0.59
 PBA_static          : 1.080E+05
 PHalt_dyn           : 0.850E+05
 Patmosphere         : 1.0132500E+05
