@@ -5,10 +5,10 @@ ET_radius           : 1.2500000E-02
 Fintercept          : 1.450E-03
 J                   : 5.640E-04
 K2drag              : 1.0000000E+01
-Kdrag               : 55.0
+Kdrag               : 92.0
 LLine_SIu           : 1.0000000E-08
-Lmax                : 0.59
-PBA_static          : 1.120E+05
+Lmax                : 0.61
+PBA_static          : 1.070E+05
 PHalt_dyn           : .60750E+05
 Patmosphere         : 1.0132500E+05
 Pintercept          : 1.190E+05
