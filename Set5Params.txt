@@ -3,11 +3,11 @@ ET_area             : 4.9087385E-04
 ET_diam             : 2.5000000E-02
 ET_radius           : 1.2500000E-02
 Fintercept          : 1.450E-03
-J                   : 5.600E-04
+J                   : 5.640E-04
 K2drag              : 1.0000000E+01
 Kdrag               : 14.0
 LLine_SIu           : 1.0000000E-08
-Lmax                : 0.575
+Lmax                : 0.48
 PBA_static          : 1.13E+05
 PHalt_dyn           : 1.100E+05
 Patmosphere         : 1.0132500E+05
