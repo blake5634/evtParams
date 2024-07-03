@@ -16,7 +16,7 @@ Psource_SIu         : 1.18E+05
 RT                  : 2.4559556E+03
 Rsource_SIu         : 0.8000E+08
 T                   : 2.9540000E+02
-Tau_coulomb         : 1.7400000E-02
+Tau_coulomb         : 6.9400000E-02
 Threshold Taper     : 1.0E+03
 Vhousing_m3         : 1.4616078E-03
 Vintercept          : 4.2137669E-01

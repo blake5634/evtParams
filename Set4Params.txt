@@ -8,7 +8,7 @@ K2drag              : 1.0000000E+01
 Kdrag               : 45.0
 LLine_SIu           : 1.0000000E-08
 Lmax                : 0.575
-PBA_static          : 1.20E+05
+PBA_static          : 1.18E+05
 PHalt_dyn           : 1.150E+05
 Patmosphere         : 1.0132500E+05
 Pintercept          : 1.450E+05
@@ -16,7 +16,7 @@ Psource_SIu         : 1.450E+05
 RT                  : 2.4559556E+03
 Rsource_SIu         : 1.3000000E+08
 T                   : 2.9540000E+02
-Tau_coulomb         : 1.7400000E-02
+Tau_coulomb         : 6.9400000E-02
 Threshold Taper     : 3.8E+03
 Vhousing_m3         : 1.4616078E-03
 Vintercept          : 4.2137669E-01
