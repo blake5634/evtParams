@@ -2,7 +2,6 @@ DataFile            : Admin
 ET_area             : TubeGeom
 ET_diam             : TubeGeom
 ET_radius           : TubeGeom
-Fintercept          : Source
 J                   : Reel
 K2drag              : ETDynam
 Kdrag               : ETDynam
@@ -11,7 +10,6 @@ Lmax                : TubeGeom
 PBA_static          : StartStop
 PHalt_dyn           : StartStop
 Patmosphere         : Physics
-Pintercept          : Source
 Psource_SIu         : Source
 RT                  : Physics
 Rsource_SIu         : Source
@@ -19,7 +17,6 @@ T                   : Physics
 Tau_coulomb         : Reel
 Threshold Taper     : StartStop
 Vhousing_m3         : Housing
-Vintercept          : Source
 dF1dL               : StartStop
 dt                  : Admin
 et_MPM              : ETDynam
