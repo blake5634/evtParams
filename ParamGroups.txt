@@ -1,6 +1,5 @@
 DataFile            : Admin
-ET_area             : TubeGeom
-ET_diam             : TubeGeom
+ET_RofL_mode        : TubeGeom
 ET_radius           : TubeGeom
 J                   : Reel
 K2drag              : ETDynam

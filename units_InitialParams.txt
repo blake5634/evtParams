@@ -1,7 +1,5 @@
 DataFile            : text
 ET_RofL_mode        : text
-ET_area             : m2
-ET_diam             : m
 ET_radius           : m
 J                   : kg/m2
 K2drag              : Nm

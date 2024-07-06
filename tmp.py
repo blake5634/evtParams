@@ -1,21 +1,34 @@
 import sys
+import glob
+import et_lib as et
 
-fname = sys.argv[1]
+files = et.get_param_files()
+for fn in files:
+    print(fn)
 
-f = open(fname, 'r')
+x = input('OK??  ...<CR>...')
 
-tlist = ['Pintercept', 'Fintercept', 'Vintercept']
-output = []
-for line in f:
-    save = True
-    for target in tlist:
-        if target in line:
-            save = False
-    if save:
-        output.append(line)
+tlist = ['ET_diam']
+print('Removing: ', tlist)
 
-f.close()
-f=open(fname, 'w')
-for line in output:
-    print(line, file=f,end='')
-f.close()
+x = input('OK??  ...<CR>...')
+
+for fn in files:
+    f = open(fn,'r')
+
+    output = []
+    for line in f:
+        save = True
+        for target in tlist:
+            if target in line:
+                save = False
+        if save:
+            output.append(line)
+
+    f.close()
+    f=open(fn, 'w')
+    for line in output:
+        print(line, file=f,end='')
+    f.close()
+
+

@@ -1,7 +1,5 @@
 DataFile            : None
 ET_RofL_mode        : constant
-ET_area             : 4.9087385E-04
-ET_diam             : 2.5000000E-02
 ET_radius           : 1.2500000E-02
 J                   : 5.1000000E-04
 K2drag              : 1.0000000E+01
