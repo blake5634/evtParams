@@ -2,8 +2,8 @@ DataFile            : eversion_flow-hi-inr_hi-fric_tube-3_trial-3.csv
 ET_RofL_mode        : constant
 ET_radius           : 1.2500000E-02
 J                   : 5.640E-04
-K2drag              : 1.0000000E+01
-Kdrag               : 30.0
+K2drag              : 3.0
+Kdrag               : 4.0
 LLine_SIu           : 1.0000000E-08
 Lmax                : 0.59
 PBA_static          : 1.170E+05
