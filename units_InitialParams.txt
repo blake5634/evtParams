@@ -1,7 +1,8 @@
 DataFile            : text
 ET_RofL_mode        : text
-ET_R_per_M          : Pa/m2/sec
 ET_radius           : m
+ET_Res_per_m        : Pa/m2/sec
+ET_Res_ratio        : dimensionless
 J                   : kg/m2
 K2drag              : Nm
 Kdrag               : N / m2 / sec

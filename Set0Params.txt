@@ -1,13 +1,14 @@
 DataFile            : eversion_flow-hi-inr_hi-fric_tube-2_trial-1.csv
 ET_RofL_mode        : constant
 ET_radius           : 1.2500000E-02
+ET_Res_per_m        : 1.0E13
 J                   : 5.640E-04
-K2drag              : 3.0
+K2drag              : 2.0
 Kdrag               : 4.0
 LLine_SIu           : 1.0000000E-08
 Lmax                : 0.59
-PBA_static          : 1.1850E+05
-PHalt_dyn           : 1.170E+05
+PBA_static          : 1.185E+05
+PHalt_dyn           : 1.155E+05
 Patmosphere         : 1.0132500E+05
 Psource_SIu         : 1.200E+05
 RT                  : 2.4559556E+03
@@ -17,7 +18,7 @@ Tau_coulomb         : 6.9400000E-02
 Threshold Taper     : 6.4E+02
 Vhousing_m3         : 1.4616078E-03
 dF1dL               : 3.6363636E+00
-dt                  : 2.5000000E-03
+dt                  : 1.5000000E-04
 et_MPM              : 1.0000000E-01
 rReel               : 1.0900000E-02
 th_dot_minCoulomb   : 5.0000000E-02
