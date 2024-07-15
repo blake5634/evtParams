@@ -9,7 +9,7 @@ Kdrag               : 4.0
 LLine_SIu           : 1.0000000E-08
 Lmax                : 0.8
 PBA_static          : 1.120E+05
-PHalt_dyn           : 1.0E+05
+PHalt_dyn           : 1.0250E+05
 Patmosphere         : 1.0132500E+05
 Psource_SIu         : 1.185E+05
 RT                  : 2.4559556E+03

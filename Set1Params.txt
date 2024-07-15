@@ -1,6 +1,7 @@
 DataFile            : eversion_flow-hi-inr_lo-fric_tube-1_trial-2.csv
 ET_RofL_mode        : constant
 ET_Res_per_m        : 1.2E-4
+ET_Res_ratio        : 0.5
 ET_radius           : 1.2500000E-02
 J                   : 5.640E-04
 K2drag              : 4.0
