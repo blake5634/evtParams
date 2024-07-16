@@ -1,11 +1,13 @@
 DataFile            : Admin
-ET_RofL_mode        : TubeGeom
-ET_radius           : TubeGeom
+ET_RofL_mode        : Tube
+ET_radius           : Tube
+ET_Res_per_m        : Tube
+ET_Res_ratio        : Tube
 J                   : Reel
 K2drag              : ETDynam
 Kdrag               : ETDynam
 LLine_SIu           : Source
-Lmax                : TubeGeom
+Lmax                : Tube
 PBA_static          : StartStop
 PHalt_dyn           : StartStop
 Patmosphere         : Physics
