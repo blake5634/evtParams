@@ -4,9 +4,9 @@ ET_radius           : m
 ET_Res_per_m        : Pa/m2/sec
 ET_Res_ratio        : dimensionless
 J                   : kg/m2
-K2drag              : Nm
-Kdrag               : N / m2 / sec
-LLine_SIu           : m3/sec / Pascal
+K2drag              : N/m2/sec
+Kdrag               : N/m/sec
+LLine_SIu           : m3/sec/Pascal
 Lmax                : m
 PBA_static          : Pascals
 PHalt_dyn           : Pascals

@@ -20,6 +20,6 @@ Threshold Taper     : 1.0000000E+03
 Vhousing_m3         : 1.2560000E-03
 dF1dL               : 3.6363636E+00
 dt                  : 5.0000000E-04
-et_MPM              : 5.0000000E-01
+et_MPM              : 3.2000000E-03
 rReel               : 1.0900000E-02
 th_dot_minCoulomb   : 5.0000000E-02
