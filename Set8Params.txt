@@ -1,4 +1,4 @@
-DataFile            : eversion_flow-hi-inr_hi-fric_tube-1_trial-4.csv
+DataFile            : eversion_flow-hi-inr_hi-fric_tube-1_trial-3.csv
 ET_Res_per_m        : 1.2000000E-04
 ET_Res_ratio        : 3.0000000E-01
 ET_RofL_mode        : constant
