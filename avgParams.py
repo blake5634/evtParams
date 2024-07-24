@@ -113,10 +113,10 @@ fpAvgs = {}
 for fp in freeParams:
     fpAvgs[fp] = 0.0   # initialize
 
+pu = et.loadPUnits('evtParams','units_InitialParams.txt')
 for index in fset:
     #print('Param set: ', files[index])
     pd = et.loadParams('', files[index])
-    pu = et.loadPUnits('evtParams','units_InitialParams.txt')
     for fp in freeParams:
         fpAvgs[fp] += pd[fp]
 
@@ -124,8 +124,20 @@ for index in fset:
 for fp in freeParams:
     fpAvgs[fp] /= len(fset)
 
-print('  Parameter set with Averaged Free Parameters' )
-et.print_param_table(fpAvgs, pu)
+print('  Parameter set including Averaged Free Parameters (n=',len(fset),')' )
+pd = et.loadParams('evtParams', 'InitialParams.txt')
+for fp in freeParams:
+    pd[fp] = fpAvgs[fp]
+
+et.print_param_table(pd, pu)
+
+print('\n---------------------------')
+for k in pd.keys():
+    if type(pd[k]) == type('hello'):
+        print(f'{k:16}: {pd[k]:10}')
+    else:
+        print(f'{k:16}: {pd[k]:10.4E}')
+print('---------------------------\n\n')
 #for paramName in pd.keys():
     #try:
         #print(f'{paramName:16}  : {fpAvgs[paramName]:10.5E}')
