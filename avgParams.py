@@ -125,7 +125,7 @@ for fp in freeParams:
     fpAvgs[fp] /= len(fset)
 
 print('  Parameter set including Averaged Free Parameters (n=',len(fset),')' )
-pd = et.loadParams('evtParams', 'InitialParams.txt')
+pd = et.loadParams('evtParams', 'Set7Params.txt')  # Set7 for fixed parms
 for fp in freeParams:
     pd[fp] = fpAvgs[fp]
 

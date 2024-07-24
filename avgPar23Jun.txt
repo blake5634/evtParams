@@ -1,17 +1,17 @@
-DataFile            : eb610645
+DataFile        : DO NOT CHANGE
 ET_Res_per_m    : 1.2000E-04
-ET_Res_ratio    : 0.5
+ET_Res_ratio    : 3.0000E-01
 ET_RofL_mode    : constant
 ET_radius       : 1.2500E-02
 J               : 5.6400E-04
-K2drag          : 1
-Kdrag           : 2.6
+K2drag          : 8.7556E-01
+Kdrag           : 2.0389E+00
 LLine_SIu       : 1.0000E-08
 Lmax            : 8.0000E-01
-PBA_static      : 1.185E+05
-PHalt_dyn       : 1.12E+05
+PBA_static      : 1.1432E+05
+PHalt_dyn       : 1.0791E+05
 Patmosphere     : 1.0132E+05
-Psource_SIu     : 1.2E+05
+Psource_SIu     : 1.2761E+05
 RT              : 2.4560E+03
 Rsource_SIu     : 1.0489E+08
 T               : 2.9540E+02
