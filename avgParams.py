@@ -109,23 +109,30 @@ else:
 
 freeParams = ['K2drag', 'Kdrag', 'PBA_static', 'PHalt_dyn', 'Psource_SIu', 'Rsource_SIu', 'Threshold Taper']
 
-fpAvgs = {}
+n = len(files)
+fpvals = {}
 for fp in freeParams:
-    fpAvgs[fp] = 0.0   # initialize
+    fpvals[fp] = np.zeros(n)   # initialize (store all vals for mu,sig)
 
 pu = et.loadPUnits('evtParams','units_InitialParams.txt')
 for index in fset:
     #print('Param set: ', files[index])
     pd = et.loadParams('', files[index])
     for fp in freeParams:
-        fpAvgs[fp] += pd[fp]
+        fpvals[fp][index] = pd[fp]
 
 # compute avgs
+#for fp in freeParams:
+    #fpAvgs[fp] /= len(fset)
+fpAvgs = {}
+fpStds = {}
 for fp in freeParams:
-    fpAvgs[fp] /= len(fset)
+    fpAvgs[fp] = np.mean(fpvals[fp])
+    fpStds[fp] = np.std(fpvals[fp])
 
 print('  Parameter set including Averaged Free Parameters (n=',len(fset),')' )
 pd = et.loadParams('evtParams', 'Set7Params.txt')  # Set7 for fixed parms
+
 for fp in freeParams:
     pd[fp] = fpAvgs[fp]
 
@@ -136,7 +143,11 @@ for k in pd.keys():
     if type(pd[k]) == type('hello'):
         print(f'{k:16}: {pd[k]:10}')
     else:
-        print(f'{k:16}: {pd[k]:10.4E}')
+        if k in freeParams:
+            pct = 100.0 * fpStds[k]/pd[k]
+            print(f'{k:16}: {pd[k]:10.4E} +/- {fpStds[k]:10.4E} ({pct:3.1f}% stdev)')
+        else:
+            print(f'{k:16}: {pd[k]:10.4E}')
 print('---------------------------\n\n')
 #for paramName in pd.keys():
     #try:
