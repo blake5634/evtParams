@@ -1,0 +1,24 @@
+ET_Res_per_m    : 1.2000E-04
+ET_Res_ratio    : 3.0000E-01
+ET_RofL_mode    : constant
+ET_radius       : 1.2500E-02
+J               : 5.6400E-04
+K2drag          : 8.7519E-01 +/- 1.5590E-01 (17.8% stdev)
+Kdrag           : 3.2975E+00 +/- 2.1301E+00 (64.6% stdev)
+LLine_SIu       : 1.0000E-08
+Lmax            : 8.2000E-01
+PBA_static      : 1.1313E+05 +/- 3.7442E+03 (3.3% stdev)
+PHalt_dyn       : 1.0796E+05 +/- 2.8202E+03 (2.6% stdev)
+Patmosphere     : 1.0132E+05
+Psource_SIu     : 1.2690E+05 +/- 1.1736E+04 (9.2% stdev)
+RT              : 2.4560E+03
+Rsource_SIu     : 1.0203E+08 +/- 2.0005E+07 (19.6% stdev)
+T               : 2.9540E+02
+Tau_coulomb     : 2.9000E-03
+Threshold Taper : 1.3619E+03 +/- 1.3134E+03 (96.4% stdev)
+Vhousing_m3     : 1.2560E-03
+dF1dL           : 3.6364E+00
+dt              : 5.0000E-05
+et_MPM          : 3.2000E-03
+rReel           : 1.0900E-02
+th_dot_minCoulomb: 5.0000E-02
