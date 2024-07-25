@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import et_lib as et
 import glob, os
+import re
 
 
 
@@ -75,9 +76,19 @@ ParamDirNames = ['evtParams']
 files = []
 fnRoots = []
 for parDir in ParamDirNames:
-        hashesRemoved = set()
-        parFiles = list(glob.glob(parDir + '/' + "*"))
-        parFiles.sort(key=lambda x: os.path.basename(x),reverse=False) # newest first
+        parFiles = list(glob.glob(parDir + '/Set' + "*.txt"))
+        fnums = []
+        for pf in parFiles:
+            try:
+                SetNo = int(re.search(r'\d+', pf).group())
+            except:
+                et.error('No match to int in file name: '+pf)
+            fnums.append(SetNo)
+        tmp = list(zip(fnums, parFiles))
+        tmp2 = sorted(tmp, key=lambda x: x[0] ) # numerical order
+        parFiles = []
+        for n, fn in tmp2:
+            parFiles.append(fn)
         filenameroots = []
         if len(parFiles) ==0:
             cto.error('No param.txt files found')
