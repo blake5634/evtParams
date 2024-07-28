@@ -12,9 +12,13 @@ import glob, os
 #
 freeParams = ['K2drag', 'Kdrag', 'PBA_static', 'PHalt_dyn', 'Psource_SIu', 'Rsource_SIu', 'Threshold Taper']
 
-pars = freeParams
-newvals = [8.7556E-1,  2.0389, 1.1432E5, 1.0791E5, 1.2761E5,
-           1.0489E8, 3.1858E3 ]
+#pars = freeParams
+#newvals = [8.7556E-1,  2.0389, 1.1432E5, 1.0791E5, 1.2761E5,
+           #1.0489E8, 3.1858E3 ]
+
+pars = ['K2drag']
+newvals = [0.0]
+
 SIMULATE = True
 #
 #######################################################
