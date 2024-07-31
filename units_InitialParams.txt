@@ -1,4 +1,5 @@
 DataFile            : text
+Compartments        : integer
 ET_RofL_mode        : text
 ET_radius           : m
 ET_Res_per_m        : Pa/m2/sec
