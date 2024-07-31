@@ -1,4 +1,5 @@
 DataFile            : c4f507b1
+Compartments        : 1
 ET_Res_per_m        : 1.2000000E-04
 ET_Res_ratio        : .22
 ET_RofL_mode        : constant

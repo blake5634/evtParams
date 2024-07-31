@@ -1,4 +1,5 @@
 DataFile            : 52f8bea7
+Compartments        : 1
 ET_Res_per_m        : 1.2000000E-04
 ET_Res_ratio        : 3.0000000E-01
 ET_RofL_mode        : constant
