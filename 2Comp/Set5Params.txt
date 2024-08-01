@@ -1,9 +1,10 @@
 DataFile            : c4f507b1
+Compartments        : 2
 ET_Res_per_m        : 1.2000000E-04
 ET_Res_ratio        : .22
 ET_RofL_mode        : constant
 ET_radius           : 1.2500000E-02
-J                   : 5.6400000E-04
+J                   : 5.640E-04
 K2drag              : 0.0000000E+00
 Kdrag               : 2.0389000E+00
 LLine_SIu           : 1.0000000E-08
@@ -14,7 +15,7 @@ Patmosphere         : 1.0132000E+05
 Psource_SIu         : 1.2050000E+05
 Rsource_SIu         : 1.0400000E+08
 T                   : 2.9540000E+02
-Tau_coulomb         : 6.9400000E-02
+Tau_coulomb         : 69.4E-03
 Threshold Taper     : 0.0E+03
 Vhousing_m3         : 1.2560000E-03
 dF1dL               : 3.6364000E+00
