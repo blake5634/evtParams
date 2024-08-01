@@ -1,5 +1,5 @@
-DataFile            : 4bf58872
 Compartments        : 1
+DataFile            : 4bf58872
 ET_Res_per_m        : 1.2000000E-04
 ET_Res_ratio        : 1.7500000E-01
 ET_RofL_mode        : constant

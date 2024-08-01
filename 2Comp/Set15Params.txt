@@ -1,3 +1,4 @@
+Compartments        : 2
 DataFile            : 0301703c
 ET_Res_per_m        : 1.2000000E-04
 ET_Res_ratio        : 8.0000000E-01

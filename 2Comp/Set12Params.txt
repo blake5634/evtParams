@@ -1,3 +1,4 @@
+Compartments        : 2
 DataFile            : 3c3dfb69
 ET_Res_per_m        : 1.2000000E-04
 ET_Res_ratio        : 1.5000000E-01
