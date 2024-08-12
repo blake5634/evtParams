@@ -1,0 +1,26 @@
+Compartments        : 2
+DataFile            :
+ET_Res_per_m        : 1.2000000E-04
+ET_Res_ratio        : 2.0000000E-01
+ET_RofL_mode        : constant
+ET_radius           : 1.2500000E-02
+J                   : 5.64E-04      # files 0-8, 4.67 files 10-15
+K2drag              : 1.00E+00
+Kdrag               : 4.0E+00
+Lmax                : 0.70
+PBA_static          : 1.13E+05
+PHalt_dyn           : 1.10E+05
+Psource_SIu         : 1.24E+05
+Rsource_SIu         : 0.80E+08
+Tau_coulomb         : 2.00E-02
+Threshold Taper     : 0.00E+00
+Vhousing_m3         : 1.2560000E-03
+dF1dL               : 3.6364000E+00
+dt                  : 2.5000000E-04
+et_MPM              : 0.0032
+rReel               : 1.0900000E-02
+th_dot_minCoulomb   : 5.0000000E-02
+LLine_SIu           : 1.0000000E-08
+Patmosphere         : 1.0132000E+05
+RT                  : 2.4560000E+03
+T                   : 2.9540000E+02
