@@ -1,26 +1,27 @@
 Compartments        : 2
 DataFile            : 5d0f0862
-ET_Res_per_m        : 1.2000000E-04
-ET_Res_ratio        : 3.0000000E-01
+COMP1               : supply_tubing
 ET_RofL_mode        : constant
-ET_radius           : 1.2500000E-02
-J                   : 5.6400000E-04
-K2drag              : 0.0000000E+00
-Kdrag               : 1.0000000E+00
-LLine_SIu           : 1.0000000E-08
-Lmax                : 8.0000000E-01
-PBA_static          : 1.1432000E+05
-PHalt_dyn           : 1.1280000E+05
-Patmosphere         : 1.0132000E+05
-Psource_SIu         : 1.4750000E+05
-RT                  : 2.4560000E+03
-Rsource_SIu         : 1.4750000E+08
-T                   : 2.9540000E+02
-Tau_coulomb         : 6.9400000E-02
-Threshold Taper     : 1.0000000E+02
-Vhousing_m3         : 1.2560000E-03
+ET_radius           : 1.25E-02
+J                   : 2.62E-04     # test
+Tau_coulomb         : 3.0e-3
+K2drag              : 4.       # length growing damping
+Kdrag               : .5       # plain old damping
+Lmax                : 1.5
+PBA_static          : 1.165E+05
+PHalt_dyn           : 1.14E+05
+Psource_SIu         : 1.4E+05
+ET_Res_per_m        : 1.20E-04
+ET_Res_ratio        : .6
+Rsource_SIu         : 1.5E+08
+Threshold Taper     : 0.0
+Vhousing_m3         : 1.260000E-03
 dF1dL               : 3.6364000E+00
-dt                  : 5.0000000E-04
-et_MPM              : 3.2000000E-03
+dt                  : 2.5000000E-04
+et_MPM              : 0.0032
 rReel               : 1.0900000E-02
-th_dot_minCoulomb   : 5.0000000E-02
+th_dot_minCoulomb   : 7.0000000E-02
+LLine_SIu           : 1.0000000E-08
+Patmosphere         : 1.0132000E+05
+RT                  : 2.4560000E+03
+T                   : 2.9540000E+02

@@ -6,14 +6,14 @@ ET_Res_ratio        : .35
 ET_RofL_mode        : constant
 ET_radius           : 1.25E-02
 J                   : 2.62E-04     # test
-Tau_coulomb         : 5.0e-3
-K2drag              : 10.       # length growing damping
-Kdrag               : 3        # plain old damping
+Tau_coulomb         : 3.0e-3
+K2drag              : 8.       # length growing damping
+Kdrag               : 1.0       # plain old damping
 Lmax                : 0.4
-PBA_static          : 1.14E+05
+PBA_static          : 1.125E+05
 PHalt_dyn           : 1.11E+05
 Psource_SIu         : 1.172E+05
-Rsource_SIu         : 0.90E+08
+Rsource_SIu         : 1.05E+08
 Threshold Taper     : 0.0
 Vhousing_m3         : 1.260000E-03
 dF1dL               : 3.6364000E+00

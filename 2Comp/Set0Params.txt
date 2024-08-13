@@ -1,6 +1,6 @@
 Compartments        : 2
 DataFile            : eb610645
-COMP1               : supply_tubing
+COMP1               : supply_tubing   #
 ET_Res_per_m        : 1.20E-04
 ET_Res_ratio        : .1
 ET_RofL_mode        : constant
