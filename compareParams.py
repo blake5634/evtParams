@@ -2,6 +2,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import et_lib as et
 import glob, os
+import sys
+import re
 
 
 
@@ -33,45 +35,48 @@ unitsConvfilename = defaultUnitsName
 pd = et.loadParams(paramDir, paramFileName)
 #uc = et.loadUnitConv(paramDir, unitsConvfilename)
 
-# unit constants
-sec_per_min = 60
-kPa_per_Pa = 0.001
-Pa_per_kPa = 1.0/kPa_per_Pa
-min_per_sec = 1/sec_per_min
-Gal_per_Liter = 0.2642
-Liter_per_Gal = 3.7854
-Liter_per_m3  = 1000.0
-Liter_per_mm3 = Liter_per_m3 / 1000**3
-Gal_per_mm3 = Liter_per_mm3 *Gal_per_Liter
-mm3_per_Gal = 1.0/Gal_per_mm3
-MM3perLiter = 1.0 / Liter_per_mm3
-# Ideal Gas Law  https://pressbooks.uiowa.edu/clonedbook/chapter/the-ideal-gas-law/
-m3_per_mole = 0.02241 # m3/mol of Air
-moles_per_m3 = 1.0/m3_per_mole
-Pa_per_PSI  = 6894.76
-atmos_Pa = 14.5 * Pa_per_PSI
-m3_per_Liter =  1.0 / Liter_per_m3  # m3
-Patmosphere = 101325.0    # Pascals
-Psource_SIu = Patmosphere + 3.0 * Pa_per_PSI # pascals
+modeltypes = ['1Comp','2Comp','23-Jul']
 
-ParamDirNames = ['evtParams']
+args = sys.argv
+cl = ' '.join(args)
+paramDir = 'evtParams/2Comp/'
 
-#files = ['eversion_flow-hi-inr_hi-fric_tube-1_trial-2.csv', 'eversion_flow-hi-inr_lo-fric_tube-1_trial-1.csv', 'eversion_flow-hi-inr_lo-fric_tube-1_trial-2.csv', 'eversion_flow-hi-inr_lo-fric_tube-1_trial-3.csv', 'eversion_flow-hi-inr_hi-fric_tube-2_trial-1.csv', 'eversion_flow-hi-inr_hi-fric_tube-2_trial-2.csv', 'eversion_flow-hi-inr_hi-fric_tube-3_trial-1.csv', 'eversion_flow-hi-inr_hi-fric_tube-3_trial-2.csv', 'eversion_flow-hi-inr_hi-fric_tube-3_trial-3.csv',
-#]
+if len(args) == 3:  #  >fmod2SI   nn  [1Comp]   nn=fileNo  '1Comp' for non-default one comp model
+    if args[2] not in modeltypes:
+            et.error(f'fmod2SI: unknown command line arg: \n     >{cl}')
+    if args[2] == '1Comp':     # not same as pd['Compartments']
+        paramDir = 'evtParams/1Comp/'
+    elif args[2] == '2Comp':   # not same as pd['Compartments']
+        paramDir = 'evtParams/2Comp/'   # default is 2Compartment model
+    elif args[2] == '23-Jul':
+        paramDir = 'evtParams/23-Jul-FlowData/'
 
-files = []
-fnRoots = []
-for parDir in ParamDirNames:
-        hashesRemoved = set()
-        parFiles = list(glob.glob(parDir + '/' + "*"))
-        parFiles.sort(key=lambda x: os.path.basename(x),reverse=False) # newest first
-        filenameroots = []
-        if len(parFiles) ==0:
-            cto.error('No param.txt files found')
-        for f in parFiles:
-            if '.txt' in f and 'Set' in f:     # e.g. Set5Params.txt
-                files.append(f)
+unitsConvfilename = 'unitConv.txt'
+defaultParamName = 'InitialParams.txt'
+defaultUnitsName = 'units_'+defaultParamName
+defaultUnitsDir = 'evtParams/'
 
+groupsfile = 'evtParams/ParamGroups.txt'
+
+
+fnums = []
+parFiles = []
+DparFiles = list(glob.glob(paramDir + '/Set*.txt'))
+for pf in DparFiles:
+    fname = pf.split('/')[-1]
+    try:
+        SetNo = int(re.search(r'\d+', fname).group())
+    except:
+        et.error('No match to int in file name: '+pf)
+    fnums.append(SetNo)
+if len(DparFiles) ==0:
+    et.error('No Setxxparam.txt files found')
+tmp = list(zip(fnums, DparFiles))
+tmp2 = sorted(tmp, key=lambda x: x[0] ) # numerical order
+for n, fn in tmp2:
+    parFiles.append(fn)
+
+files = parFiles
 #print('file set:  ', files)
 ###################################################
 #
@@ -79,14 +84,16 @@ for parDir in ParamDirNames:
 #
 ###################################################
 print('Discovered Data Files: ')
-for i,fn in enumerate(files):
-    fn2 = fn.split('/')[1]
+for i,fn in enumerate(parFiles):
+    fn2 = '/'.join(fn.split('/')[1:])
     print(f'{i:3}  {fn2}')
 
-sel = str(input('Select file numbers (-1) for all: '))
+sel = str(input('Select file numbers to compare (-1) for all: '))
 nums = sel.split()
-if len(nums)<1:
-    nums = [-1]
+#if len(nums)<1:
+    #nums = [-1]
+if len(nums) != 2:
+    et.error(' I can only compare 2 files at this time...')
 fset=[] # place to collect user-selected filenames
 if int(nums[0]) < 0:
     fset = range(len(files))
@@ -94,19 +101,27 @@ else:
     for n in nums:
         fset.append(int(n))
 
-if SIMULATE:
-    print('  ...   SIMULATING  ...')
-for index in fset:
-    print('Param set: ', files[index])
-    pd = et.loadDict('', files[index])
-    for i,par in enumerate(pars):
-        print(f'    changing {par} from {pd[par]:12} to {newvals[i]}')
-        if not SIMULATE:
-            pd[par] = newvals[i]
-    if not SIMULATE:
-        et.saveParams(files[index],pd)
-    print(files[index], ' ...   Saved')
+fnum1  =fset[0]
+fnum2 = fset[1]
+pd1 = et.loadDict('', files[fnum1])
+pd2 = et.loadDict('', files[fnum2])
 
-if SIMULATE:
-    print(' ... end of SIMULATION ...')
+print(f'Comparing {files[fnum1]} to {files[fnum2]}')
+for k in pd1.keys():
+    star = ''
+    try:
+        pd2[k]
+    except:
+        pd2[k] = 'None'
+    if type(pd1[k])==type(5.78):
+        if abs(pd1[k] - pd2[k]) > pd1[k]*0.02:
+            star = '*'
+        print(f'{k:16}: {pd1[k]:10.4E} ... {pd2[k]:10.4E} {star}')
+    else:
+        if pd1[k] != pd2[k]:
+            star = '*'
+        print(f'{k:16}: {pd1[k]:10} ... {pd2[k]:10} {star}')
+
+
+
 print('done')
