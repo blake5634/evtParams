@@ -62,6 +62,8 @@ groupsfile = 'evtParams/ParamGroups.txt'
 fnums = []
 parFiles = []
 DparFiles = list(glob.glob(paramDir + '/Set*.txt'))
+if len(DparFiles) ==0:
+    et.error('No Setxxparam.txt files found')
 for pf in DparFiles:
     fname = pf.split('/')[-1]
     try:
@@ -69,8 +71,6 @@ for pf in DparFiles:
     except:
         et.error('No match to int in file name: '+pf)
     fnums.append(SetNo)
-if len(DparFiles) ==0:
-    et.error('No Setxxparam.txt files found')
 tmp = list(zip(fnums, DparFiles))
 tmp2 = sorted(tmp, key=lambda x: x[0] ) # numerical order
 for n, fn in tmp2:

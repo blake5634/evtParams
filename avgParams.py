@@ -28,7 +28,7 @@ if len(cl_args) > 1:
 
 paramDir = 'evtParams/'
 
-ParamDirNames = ['evtParams', 'evtParams/2Comp', 'evtParams/1Comp']
+ParamDirNames = ['evtParams', 'evtParams/2Comp', 'evtParams/1Comp', 'evtParams/23-Jul-FlowData']
 
 unitsConvfilename = 'unitConv.txt'
 defaultParamName = 'InitialParams.txt'
@@ -36,42 +36,21 @@ defaultUnitsName = 'units_'+defaultParamName
 unitsConvfilename = defaultUnitsName
 
 pd = et.loadParams(paramDir, defaultParamName)
-#uc = et.loadUnitConv(paramDir, unitsConvfilename)
-
-# unit constants
-sec_per_min = 60
-kPa_per_Pa = 0.001
-Pa_per_kPa = 1.0/kPa_per_Pa
-min_per_sec = 1/sec_per_min
-Gal_per_Liter = 0.2642
-Liter_per_Gal = 3.7854
-Liter_per_m3  = 1000.0
-Liter_per_mm3 = Liter_per_m3 / 1000**3
-Gal_per_mm3 = Liter_per_mm3 *Gal_per_Liter
-mm3_per_Gal = 1.0/Gal_per_mm3
-MM3perLiter = 1.0 / Liter_per_mm3
-# Ideal Gas Law  https://pressbooks.uiowa.edu/clonedbook/chapter/the-ideal-gas-law/
-m3_per_mole = 0.02241 # m3/mol of Air
-moles_per_m3 = 1.0/m3_per_mole
-Pa_per_PSI  = 6894.76
-atmos_Pa = 14.5 * Pa_per_PSI
-m3_per_Liter =  1.0 / Liter_per_m3  # m3
-Patmosphere = 101325.0    # Pascals
-Psource_SIu = Patmosphere + 3.0 * Pa_per_PSI # pascals
 
 
 files = []
 fnRoots = []
 parFiles = []
+fnums = []
 filenameroots = []
 for parDir in ParamDirNames:
     print (f'Checking: {parDir}')
-    DparFiles = list(glob.glob(parDir + '/Set' + "*.txt"))
+    DparFiles = list(glob.glob(parDir + '/Set*.txt'))
     print (f'         Found:  {DparFiles}')
-    fnums = []
     for pf in DparFiles:
+        fname = pf.split('/')[-1]
         try:
-            SetNo = int(re.search(r'\d+', pf).group())
+            SetNo = int(re.search(r'\d+', fname).group())
         except:
             et.error('No match to int in file name: '+pf)
         fnums.append(SetNo)
@@ -81,9 +60,7 @@ for parDir in ParamDirNames:
         parFiles.append(fn)
 if len(parFiles) ==0:
     et.error('No SetXXparam.txt files found')
-for f in parFiles:
-    if '.txt' in f and 'Set' in f:     # e.g. Set5Params.txt
-        files.append(f)
+files = parFiles
 
 #print('file set:  ', files)
 ###################################################
@@ -111,7 +88,7 @@ else:
         fset.append(int(n))
 
 freeParams = ['K2drag', 'Kdrag', 'PBA_static', 'PHalt_dyn', 'Psource_SIu', 'Rsource_SIu',
-    'Threshold Taper', 'Tau_coulomb']
+    'Threshold Taper', 'Tau_coulomb', 'Tau_coulomb', ]
 
 n = len(files)
 fpvals = {}
@@ -141,25 +118,27 @@ for fp in freeParams:
 
 et.print_param_table(pd, pu)
 
-print('\n---------------------------')
+print('\n------Standard Deviations (free Params)---------------')
 for k in pd.keys():
     if type(pd[k]) == type('hello'):
         print(f'{k:16}: {pd[k]:10}')
     else:
         if k in freeParams:
-            try: # check for divide by zero
+            if abs(pd[k]) > 0.0000001: # check for divide by zero
                 pct = 100.0 * fpStds[k]/pd[k]
-            except:
+                print(f'{k:16}: {pd[k]:10.4E} +/- {fpStds[k]:10.4E} ({pct:3.1f}% stdev)')
+            else:
                 pct = 100.0 * fpStds[k] #scale by 1.0 arbitrarily
-            print(f'{k:16}: {pd[k]:10.4E} +/- {fpStds[k]:10.4E} ({pct:3.1f}% stdev)')
-        else:
-            print(f'{k:16}: {pd[k]:10.4E}')
+                print(f'{k:16}: {pd[k]:10.4E} +/- {fpStds[k]:10.4E} ')
+
 print('---------------------------\n\n')
-#for paramName in pd.keys():
+#for paramName in pd.keys(l|c|l):
     #try:
         #print(f'{paramName:16}  : {fpAvgs[paramName]:10.5E}')
     #except:
         #print(f'{paramName:16}  : {pd[paramName]:10.5E}')
 
-
+print('-------------- Latex Table Output ----------------')
+et.print_param_table_latex(pd, pu)
+print('---------------------------\n\n')
 print('done')
