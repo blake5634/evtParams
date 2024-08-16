@@ -30,6 +30,8 @@ paramDir = 'evtParams/'
 
 ParamDirNames = ['evtParams', 'evtParams/2Comp', 'evtParams/1Comp', 'evtParams/23-Jul-FlowData']
 
+ParamDirNames = ['evtParams/2Comp']
+
 unitsConvfilename = 'unitConv.txt'
 defaultParamName = 'InitialParams.txt'
 defaultUnitsName = 'units_'+defaultParamName
@@ -87,13 +89,15 @@ else:
     for n in nums:
         fset.append(int(n))
 
-freeParams = ['K2drag', 'Kdrag', 'PBA_static', 'PHalt_dyn', 'Psource_SIu', 'Rsource_SIu',
+print('File number set: ', fset)
+
+freeParams = ['Compartments', 'K2drag', 'Kdrag', 'PBA_static', 'PHalt_dyn', 'Psource_SIu', 'Rsource_SIu',
     'Threshold Taper', 'Tau_coulomb', 'Tau_coulomb', ]
 
 n = len(files)
 fpvals = {}
 for fp in freeParams:
-    fpvals[fp] = np.zeros(n)   # initialize (store all param vals for computing mu,sig)
+    fpvals[fp] = np.zeros(len(fset))   # initialize (store all param vals for computing mu,sig)
 
 pu = et.loadPUnits('evtParams','units_InitialParams.txt')
 
@@ -107,6 +111,9 @@ for index in fset:
 fpAvgs = {}
 fpStds = {}
 for fp in freeParams:
+    if fp == 'Compartments':
+        print('Compartments data:')
+        print(fpvals[fp])
     fpAvgs[fp] = np.mean(fpvals[fp])
     fpStds[fp] = np.std(fpvals[fp])
 
