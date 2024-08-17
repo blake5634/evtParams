@@ -10,8 +10,12 @@ import glob, os
 #
 #    Configure here
 #
-freeParams = ['K2drag', 'Kdrag', 'PBA_static', 'PHalt_dyn', 'Psource_SIu', 'Rsource_SIu', 'Threshold Taper']
 
+
+ParamDirNames = ['evtParams/2Comp']
+
+# example of multiple changes:
+#freeParams = ['K2drag', 'Kdrag', 'PBA_static', 'PHalt_dyn', 'Psource_SIu', 'Rsource_SIu', 'Threshold Taper']
 #pars = freeParams
 #newvals = [8.7556E-1,  2.0389, 1.1432E5, 1.0791E5, 1.2761E5,
            #1.0489E8, 3.1858E3 ]
@@ -19,32 +23,11 @@ freeParams = ['K2drag', 'Kdrag', 'PBA_static', 'PHalt_dyn', 'Psource_SIu', 'Rsou
 pars = ['K2drag']
 newvals = [0.0]
 
-SIMULATE = True
+
+######
+SIMULATE = True       # don't do the edit for real: only test
 #
 #######################################################
-
-
-
-## Unit Conversions
-#uc = {
-    #"sec_per_min": 60,
-    #"kPa_per_Pa": 0.001,
-    #"Pa_per_kPa": 1.0 / 0.001,
-    #"min_per_sec": 1 / 60,
-    #"Gal_per_Liter": 0.2642,
-    #"Liter_per_Gal": 3.7854,
-    #"Liter_per_m3": 1000.0,
-    #"Liter_per_mm3": 1000.0 / 1000**3,
-    #"Gal_per_mm3": (1000.0 / 1000**3) * 0.2642,
-    #"mm3_per_Gal": 1.0 / ((1000.0 / 1000**3) * 0.2642),
-    #"MM3perLiter": 1.0 / (1000.0 / 1000**3), # Ideal Gas Law  https://pressbooks.uiowa.edu/clonedbook/chapter/the-ideal-gas-law/
-    #"m3_per_mole": 0.02241,  # m3/mol of Air
-    #"moles_per_m3": 1.0 / 0.02241,
-    #"Pa_per_PSI": 6894.76,
-    #"atmos_Pa": 14.5 * 6894.76,
-    #"et_MPM"  : 0.0032 : kg/m
-    #"m3_per_Liter": 1.0 / 1000.0  # m3
-#}
 
 
 paramDir = 'evtParams/'
@@ -57,45 +40,25 @@ unitsConvfilename = defaultUnitsName
 pd = et.loadParams(paramDir, paramFileName)
 #uc = et.loadUnitConv(paramDir, unitsConvfilename)
 
-# unit constants
-sec_per_min = 60
-kPa_per_Pa = 0.001
-Pa_per_kPa = 1.0/kPa_per_Pa
-min_per_sec = 1/sec_per_min
-Gal_per_Liter = 0.2642
-Liter_per_Gal = 3.7854
-Liter_per_m3  = 1000.0
-Liter_per_mm3 = Liter_per_m3 / 1000**3
-Gal_per_mm3 = Liter_per_mm3 *Gal_per_Liter
-mm3_per_Gal = 1.0/Gal_per_mm3
-MM3perLiter = 1.0 / Liter_per_mm3
-# Ideal Gas Law  https://pressbooks.uiowa.edu/clonedbook/chapter/the-ideal-gas-law/
-m3_per_mole = 0.02241 # m3/mol of Air
-moles_per_m3 = 1.0/m3_per_mole
-Pa_per_PSI  = 6894.76
-atmos_Pa = 14.5 * Pa_per_PSI
-m3_per_Liter =  1.0 / Liter_per_m3  # m3
-Patmosphere = 101325.0    # Pascals
-Psource_SIu = Patmosphere + 3.0 * Pa_per_PSI # pascals
 
-ParamDirNames = ['evtParams']
+fnums = []
+parFiles = []
+DparFiles = list(glob.glob(paramDir + '/Set*.txt'))
+if len(DparFiles) ==0:
+    et.error('No Setxxparam.txt files found')
+for pf in DparFiles:
+    fname = pf.split('/')[-1]
+    try:
+        SetNo = int(re.search(r'\d+', fname).group())
+    except:
+        et.error('No match to int in file name: '+pf)
+    fnums.append(SetNo)
+tmp = list(zip(fnums, DparFiles))
+tmp2 = sorted(tmp, key=lambda x: x[0] ) # numerical order
+for n, fn in tmp2:
+    parFiles.append(fn)
 
-#files = ['eversion_flow-hi-inr_hi-fric_tube-1_trial-2.csv', 'eversion_flow-hi-inr_lo-fric_tube-1_trial-1.csv', 'eversion_flow-hi-inr_lo-fric_tube-1_trial-2.csv', 'eversion_flow-hi-inr_lo-fric_tube-1_trial-3.csv', 'eversion_flow-hi-inr_hi-fric_tube-2_trial-1.csv', 'eversion_flow-hi-inr_hi-fric_tube-2_trial-2.csv', 'eversion_flow-hi-inr_hi-fric_tube-3_trial-1.csv', 'eversion_flow-hi-inr_hi-fric_tube-3_trial-2.csv', 'eversion_flow-hi-inr_hi-fric_tube-3_trial-3.csv',
-#]
-
-files = []
-fnRoots = []
-for parDir in ParamDirNames:
-        hashesRemoved = set()
-        parFiles = list(glob.glob(parDir + '/' + "*"))
-        parFiles.sort(key=lambda x: os.path.basename(x),reverse=False) # newest first
-        filenameroots = []
-        if len(parFiles) ==0:
-            cto.error('No param.txt files found')
-        for f in parFiles:
-            if '.txt' in f and 'Set' in f:     # e.g. Set5Params.txt
-                files.append(f)
-
+files = parFiles
 #print('file set:  ', files)
 ###################################################
 #
@@ -103,8 +66,8 @@ for parDir in ParamDirNames:
 #
 ###################################################
 print('Discovered Data Files: ')
-for i,fn in enumerate(files):
-    fn2 = fn.split('/')[1]
+for i,fn in enumerate(parFiles):
+    fn2 = '/'.join(fn.split('/')[1:])
     print(f'{i:3}  {fn2}')
 
 sel = str(input('Select file numbers (-1) for all: '))
@@ -129,7 +92,9 @@ for index in fset:
             pd[par] = newvals[i]
     if not SIMULATE:
         et.saveParams(files[index],pd)
-    print(files[index], ' ...   Saved')
+        print(files[index], ' ...   Saved')
+    else:
+        print('Simulating: ... save modified params to ', files[index])
 
 if SIMULATE:
     print(' ... end of SIMULATION ...')

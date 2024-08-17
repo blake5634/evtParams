@@ -37,8 +37,10 @@ defaultParamName = 'InitialParams.txt'
 defaultUnitsName = 'units_'+defaultParamName
 unitsConvfilename = defaultUnitsName
 
-pd = et.loadParams(paramDir, defaultParamName)
+pRefD = et.loadParams(paramDir, defaultParamName)
+pd = pRefD.copy()
 
+print('COMP1: ', pd['COMP1'])
 
 files = []
 fnRoots = []
@@ -91,7 +93,7 @@ else:
 
 print('File number set: ', fset)
 
-freeParams = ['Compartments', 'K2drag', 'Kdrag', 'PBA_static', 'PHalt_dyn', 'Psource_SIu', 'Rsource_SIu',
+freeParams = [ 'K2drag', 'Kdrag', 'PBA_static', 'PHalt_dyn', 'Psource_SIu', 'Rsource_SIu',
     'Threshold Taper', 'Tau_coulomb', 'Tau_coulomb', ]
 
 n = len(files)
@@ -104,6 +106,7 @@ pu = et.loadPUnits('evtParams','units_InitialParams.txt')
 for index in fset:
     #print('Param set: ', files[index])
     pd = et.loadParams('', files[index])
+    print(index, ' COMP1: ', pd['COMP1'], files[index])
     for fp in freeParams:
         fpvals[fp][index] = pd[fp]
 
@@ -118,15 +121,23 @@ for fp in freeParams:
     fpStds[fp] = np.std(fpvals[fp])
 
 print('  Parameter set including Averaged Free Parameters (n=',len(fset),')' )
-pd = et.loadParams('evtParams/1Comp', 'Set7Params.txt')  # Set7 for fixed parms
+pd = et.loadParams('evtParams/1Comp', 'Set0Params.txt')  # Set0 for fixed parms
 
+# fill in any missing values
+for k in pRefD.keys():
+    try:   # defaults for missing values
+        x = pd[k]
+    except:
+        print('missing key: ', k)
+        pd[k] = pRefD[k]
+print('      ...   fixed: ', pd['COMP1'])
 for fp in freeParams:
     pd[fp] = fpAvgs[fp]
 
 et.print_param_table(pd, pu)
 
 print('\n------Standard Deviations (free Params)---------------')
-for k in pd.keys():
+for k in pRefD.keys():
     if type(pd[k]) == type('hello'):
         print(f'{k:16}: {pd[k]:10}')
     else:
@@ -148,4 +159,22 @@ print('---------------------------\n\n')
 print('-------------- Latex Table Output ----------------')
 et.print_param_table_latex(pd, pu)
 print('---------------------------\n\n')
+
+print('-------------- Complete editParam.py config code output ----------------')
+print('COMP1: ', pd['COMP1'])
+newvals = '['
+for k in pRefD.keys():
+    newvals += f"{pd[k]}, "
+newvals += ']\n'
+parlist = '['
+for k in pd.keys():
+    parlist += f"'{k}', "
+parlist += ']\n'
+
+print('pars = ',parlist)
+print('newvals = ', newvals)
+print('---------------------------\n\n')
+
+
+
 print('done')

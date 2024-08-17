@@ -1,4 +1,5 @@
 DataFile            : text
+COMP1               : text
 Compartments        : integer
 ET_RofL_mode        : text
 ET_radius           : m
