@@ -103,7 +103,7 @@ for fp in freeParams:
 
 pu = et.loadPUnits('evtParams','units_InitialParams.txt')
 
-for index in fset:
+for index in fset:  # load the pfiles we are averaging and read each par.
     #print('Param set: ', files[index])
     pd = et.loadParams('', files[index])
     print(index, ' COMP1: ', pd['COMP1'], files[index])
@@ -120,18 +120,23 @@ for fp in freeParams:
     fpAvgs[fp] = np.mean(fpvals[fp])
     fpStds[fp] = np.std(fpvals[fp])
 
+print('\n---------------------------------------------------')
 print('  Parameter set including Averaged Free Parameters (n=',len(fset),')' )
-pd = et.loadParams('evtParams/1Comp', 'Set0Params.txt')  # Set0 for fixed parms
 
-# fill in any missing values
-for k in pRefD.keys():
-    try:   # defaults for missing values
-        x = pd[k]
-    except:
-        print('missing key: ', k)
-        pd[k] = pRefD[k]
-print('      ...   fixed: ', pd['COMP1'])
+## fill in any missing values
+#for k in pRefD.keys():
+    #try:   # defaults for missing values
+        #x = pd[k]
+    #except:
+        #print('missing key: ', k)
+        #pd[k] = pRefD[k]
+#print('      ...   fixed: ', pd['COMP1'])
+
 for fp in freeParams:
+    try:
+        x=pd[fp]
+    except:
+        et.error('updating params with avgs: something wrong: ', fp)
     pd[fp] = fpAvgs[fp]
 
 et.print_param_table(pd, pu)
@@ -161,13 +166,25 @@ et.print_param_table_latex(pd, pu)
 print('---------------------------\n\n')
 
 print('-------------- Complete editParam.py config code output ----------------')
-print('COMP1: ', pd['COMP1'])
+pdEdits = pRefD.copy()
+del pdEdits['Compartments']  # these are fixed pars
+del pdEdits['DataFile']
+del pdEdits['COMP1']
+del pdEdits['ET_RofL_mode']
+del pdEdits['Patmosphere']
+del pdEdits['RT']
+del pdEdits['T']
+del pdEdits['ET_radius']
+del pdEdits['dt']
+del pdEdits['et_MPM']
+del pdEdits['rReel']
+
 newvals = '['
-for k in pRefD.keys():
+for k in pdEdits.keys():
     newvals += f"{pd[k]}, "
 newvals += ']\n'
 parlist = '['
-for k in pd.keys():
+for k in pdEdits.keys():
     parlist += f"'{k}', "
 parlist += ']\n'
 
