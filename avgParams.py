@@ -30,7 +30,7 @@ paramDir = 'evtParams/'
 
 ParamDirNames = ['evtParams', 'evtParams/2Comp', 'evtParams/1Comp', 'evtParams/23-Jul-FlowData']
 
-ParamDirNames = ['evtParams/2Comp']
+ParamDirNames = ['evtParams/9Files_params']
 
 unitsConvfilename = 'unitConv.txt'
 defaultParamName = 'InitialParams.txt'
@@ -140,6 +140,11 @@ for fp in freeParams:
     pd[fp] = fpAvgs[fp]
 
 et.print_param_table(pd, pu)
+
+
+outputFN = 'tmpParamSet.txt'
+print(f'\n------Saving Averaged Param Dict ({outputFN})---------------')
+et.saveParams(outputFN, pd)
 
 print('\n------Standard Deviations (free Params)---------------')
 for k in pRefD.keys():

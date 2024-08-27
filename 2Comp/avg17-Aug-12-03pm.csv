@@ -1,0 +1,19 @@
+Parameter Name:Avg Value:Set 5 fit
+ET_Res_ratio        :0.6:0.65
+J                   :0.000262:0.000262
+K2drag              :5.556:8
+Kdrag               :2.111:1
+Lmax                :0.7:0.5
+PBA_static          :112943.33:113700
+PHalt_dyn           :108844.44:111000
+Psource_SIu         :125822.22:118600
+Rsource_SIu         :135000000:110000000
+Tau_coulomb         :0.00322:0.00322
+::
+Vhousing_m3         :0.00126:0.00126
+dF1dL               :3.6364:3.6364
+dt                  :0.00025:0.00025
+et_MPM              :0.0032:0.0032
+rReel               :0.0109:0.0109
+ET_RofL_mode        : constant: constant
+ET_radius           :0.0125:0.0125

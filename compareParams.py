@@ -39,7 +39,7 @@ modeltypes = ['1Comp','2Comp','23-Jul']
 
 args = sys.argv
 cl = ' '.join(args)
-paramDir = 'evtParams/2Comp/'
+paramDir = 'evtParams/'
 
 if len(args) == 3:  #  >fmod2SI   nn  [1Comp]   nn=fileNo  '1Comp' for non-default one comp model
     if args[2] not in modeltypes:
@@ -61,21 +61,24 @@ groupsfile = 'evtParams/ParamGroups.txt'
 
 fnums = []
 parFiles = []
-DparFiles = list(glob.glob(paramDir + '/Set*.txt'))
+#DparFiles = list(glob.glob(paramDir + '/Set*.txt'))
+DparFiles = list(glob.glob(paramDir + '/*.txt'))
 if len(DparFiles) ==0:
-    et.error('No Setxxparam.txt files found')
+    et.error('No param.txt files found')
 for pf in DparFiles:
     fname = pf.split('/')[-1]
     try:
         SetNo = int(re.search(r'\d+', fname).group())
     except:
-        et.error('No match to int in file name: '+pf)
+        print('No match to int in file name: '+pf)
     fnums.append(SetNo)
-tmp = list(zip(fnums, DparFiles))
-tmp2 = sorted(tmp, key=lambda x: x[0] ) # numerical order
-for n, fn in tmp2:
-    parFiles.append(fn)
-
+if len(fnums) == len(DparFiles):
+    tmp = list(zip(fnums, DparFiles))
+    tmp2 = sorted(tmp, key=lambda x: x[0] ) # numerical order
+    for n, fn in tmp2:
+        parFiles.append(fn)
+else:
+    parFiles = DparFiles
 files = parFiles
 #print('file set:  ', files)
 ###################################################
@@ -107,6 +110,7 @@ pd1 = et.loadDict('', files[fnum1])
 pd2 = et.loadDict('', files[fnum2])
 
 print(f'Comparing {files[fnum1]} to {files[fnum2]}')
+eolLatex = '\\\\ \\hline'
 for k in pd1.keys():
     star = ''
     try:
@@ -114,13 +118,13 @@ for k in pd1.keys():
     except:
         pd2[k] = 'None'
     if type(pd1[k])==type(5.78):
-        if abs(pd1[k] - pd2[k]) > pd1[k]*0.02:
+        if abs(pd1[k] - pd2[k]) > pd1[k]*0.05:
             star = '*'
-        print(f'{k:16}: {pd1[k]:10.4E} ... {pd2[k]:10.4E} {star}')
+        print(f'{k:16} & {pd1[k]:10.4E} & {pd2[k]:10.4E} {star}'+ eolLatex)
     else:
         if pd1[k] != pd2[k]:
             star = '*'
-        print(f'{k:16}: {pd1[k]:10} ... {pd2[k]:10} {star}')
+        print(f'{k:16} & {pd1[k]:10} & {pd2[k]:10} {star}'+eolLatex)
 
 
 

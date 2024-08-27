@@ -3,7 +3,7 @@ Compartments        : 2.0000000E+00
 DataFile            : 15g42423
 ET_Res_per_m        : 1.2000000E-04
 ET_Res_ratio        : 0.25
-ET_RofL_mode        : ramp
+ET_RofL_mode        : box
 ET_radius           : 1.2500000E-02
 J                   : 2.6200000E-04
 K2drag              : 6.

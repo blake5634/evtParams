@@ -1,24 +1,24 @@
 COMP1               : supply_tubing
 Compartments        : 2.0000000E+00
-DataFile            : 15g42423
+DataFile            : 52f8bea7
 ET_Res_per_m        : 1.2000000E-04
-ET_Res_ratio        : 0.25
-ET_RofL_mode        : ramp
+ET_Res_ratio        : 5.0000000E-01
+ET_RofL_mode        : constant
 ET_radius           : 1.2500000E-02
 J                   : 2.6200000E-04
-K2drag              : 6.
-Kdrag               : 1.0
+K2drag              : 2.7283950666666663
+Kdrag               : 2.9345679
 LLine_SIu           : 1.0000000E-08
-Lmax                : 0.425
-PBA_static          : 1.120E+05
-PHalt_dyn           : 1.10E+05
+Lmax                : 5.4000000E-01
+PBA_static          : 109833.33333333333
+PHalt_dyn           : 106671.60444444444
 Patmosphere         : 1.0132000E+05
-Psource_SIu         : 1.175E+05
+Psource_SIu         : 127724.44444444444
 RT                  : 2.4560000E+03
-Rsource_SIu         : 1.30E+08
+Rsource_SIu         : 136111111.1111111
 T                   : 2.9540000E+02
-Tau_coulomb         : 2.0E-03
-Threshold Taper     : 0.0000000E+00
+Tau_coulomb         : 0.0019432098666666664
+Threshold Taper     : 0.0
 Vhousing_m3         : 1.2600000E-03
 dF1dL               : 3.6364000E+00
 dt                  : 2.5000000E-04
